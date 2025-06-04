@@ -173,11 +173,12 @@ async def prediction_loop():
 
 # === Run Server ===
 async def main():
-    print("🚀 WebSocket server running on ws://0.0.0.0:8765")
+    port = int(os.environ.get("PORT", 8765))
+    print(f"🚀 WebSocket server running on ws://0.0.0.0:{port}")
     server = await websockets.serve(
         handle_client,
         "0.0.0.0",
-        8765,
+        port,
         max_size=2**20,
         ping_interval=30,
         ping_timeout=30
@@ -186,3 +187,4 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
