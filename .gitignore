@@ -1,0 +1,26 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+
+# Environment
+venv/
+.env
+
+# Model files
+*.h5
+*.pkl
+*.pt
+*.pth
+model/
+
+# Data
+data/
+processed_data/
+latest_prediction.json
+global_scaler.py
+
+# Frontend build + dependencies
+frontend/node_modules/
+
+# Embedded repo (if still exists)
+Hand-Gesture-Recognition-System/
