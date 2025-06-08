@@ -3,7 +3,7 @@ WORKDIR /app
 COPY . .
 
 RUN pip install --upgrade pip && \
-    pip install -r requirements.txt && \
+    pip install -r requirements.txt uvicorn && \
     apt-get update && apt-get install -y supervisor
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
