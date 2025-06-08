@@ -1,42 +1,14 @@
 version: '3.9'
 
 services:
-  ws_predictor:
+  gesture_backend:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: ws_predictor
-    command: python backend/ws_predictor.py
+    container_name: gesture_backend
     ports:
-      - "8765:8765"
+      - "8000:8000"  # FastAPI
+      - "5000:5000"  # Flask IP Server
+      - "8765:8765"  # WebSocket
     restart: always
-
-  ip_server:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: ip_server
-    command: python backend/flask_ip_server.py
-    ports:
-      - "5000:5000"
-    restart: always
-
-  fastapi_api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: fastapi_api
-    command: uvicorn backend.fastapi_api:app --host 0.0.0.0 --port 8000
-    ports:
-      - "8000:8000"
-    restart: always
-
-  frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: frontend
-    command: python backend/mpm.py
-    ports:
-      - "8501:8501"
-    restart: always
+    
