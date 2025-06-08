@@ -3,19 +3,20 @@ name: Deploy to Azure Web App (Docker)
 on:
   push:
     branches:
-      - main  # غيره لو الفرع مختلف
+      - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy to Azure
+      - name: Deploy to Azure Web App (Docker)
         uses: azure/webapps-deploy@v2
         with:
-          app-name: GR-system                # لازم يكون نفس اسم الـ App بالضبط
+          app-name: 'GR-system'                      # اسم الـ Web App على Azure
+          slot-name: 'Production'                    # أو staging لو كنت عامله
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: .                         # بيبعت كل الكود لجهاز Azure
+          package: .                                  # معناها استخدم كل المشروع مع Dockerfile
