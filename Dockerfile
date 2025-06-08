@@ -1,10 +1,11 @@
 FROM python:3.10-slim
-
 WORKDIR /app
-
 COPY . .
 
-RUN pip install --upgrade pip setuptools wheel && \
-    pip install -r requirements.txt
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt && \
+    apt-get update && apt-get install -y supervisor
 
-CMD ["python", "backend/ws_predictor.py"]  # Default لو مش محدد command في docker-compose
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
