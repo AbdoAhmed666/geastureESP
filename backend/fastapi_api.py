@@ -5,6 +5,11 @@ import os
 
 app = FastAPI()
 
+# ✅ Root endpoint
+@app.get("/")
+def root():
+    return {"message": "GR-SYSTEM backend is up and running!"}
+
 # CORS for frontend polling
 app.add_middleware(
     CORSMiddleware,
