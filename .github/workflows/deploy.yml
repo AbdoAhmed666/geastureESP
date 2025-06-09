@@ -1,4 +1,4 @@
-name: Deploy Dockerized App to Azure
+name: Deploy to Azure Web App (Docker)
 
 on:
   push:
@@ -13,22 +13,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Login to Docker Hub
+      - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/gesture-backend:latest .
+        run: docker build -t gesture-backend:latest .
 
-      - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/gesture-backend:latest
+      - name: Push Docker image to Docker Hub
+        run: docker tag gesture-backend:latest ${{ secrets.DOCKER_USERNAME }}/gesture-backend:latest && docker push ${{ secrets.DOCKER_USERNAME }}/gesture-backend:latest
 
-      - name: 🔐 Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-
-      - name: 🚀 Deploy Docker container to Azure Web App
+      - name: Deploy Docker container to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: GR-system
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           images: ${{ secrets.DOCKER_USERNAME }}/gesture-backend:latest
