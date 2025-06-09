@@ -173,7 +173,7 @@ async def prediction_loop():
 
 # === Run Server ===
 async def main():
-    port = int(os.environ.get("PORT", 8765))
+    port = int(os.environ.get("WS_PORT", 8765))
     print(f"🚀 WebSocket server running on ws://0.0.0.0:{port}")
     server = await websockets.serve(
         handle_client,
