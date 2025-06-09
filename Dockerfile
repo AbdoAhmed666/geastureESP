@@ -22,7 +22,8 @@ RUN echo "trigger rebuild $(date)" && \
 # عرض البورتات المفتوحة (FastAPI + WebSocket)
 EXPOSE 8000
 EXPOSE 8765
-EXPOSE 5000  # Flask IP server
+# Flask IP server
+EXPOSE 5000
 
 # نقطة التشغيل
 CMD ["python3", "-m", "backend.combined_runner"]
