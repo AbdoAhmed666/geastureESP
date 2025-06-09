@@ -6,13 +6,6 @@ __pycache__/
 venv/
 .env
 
-# Model files
-*.h5
-*.pkl
-*.pt
-*.pth
-model/
-
 # Data
 data/
 processed_data/
