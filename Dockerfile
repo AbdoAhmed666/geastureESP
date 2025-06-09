@@ -12,4 +12,4 @@ COPY . .
 RUN echo "trigger rebuild $(date)"
 EXPOSE 8000
 
-CMD ["python", "backend/combined_runner.py"]
+CMD ["python3.10", "backend/combined_runner.py"]
