@@ -22,7 +22,12 @@ jobs:
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/gesture-backend:latest
 
-      - name: Deploy Docker container to Azure Web App
+      - name: 🔐 Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+
+      - name: 🚀 Deploy Docker container to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: GR-system
