@@ -11,5 +11,5 @@ COPY . .
 # Force rebuild: Trigger full Docker cache bust
 RUN echo "trigger rebuild $(date)"
 EXPOSE 8000
-
+RUN pip list && python3 -c "import uvicorn; print('uvicorn available')"
 CMD ["python3.10", "backend/combined_runner.py"]
