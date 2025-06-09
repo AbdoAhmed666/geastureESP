@@ -8,7 +8,5 @@ RUN apt-get update && apt-get install -y gcc && \
     pip install -r requirements.txt
 
 EXPOSE 8000
-EXPOSE 5000
-EXPOSE 8765
 
-CMD ["python", "backend/combined_runner.py"]
+CMD ["uvicorn", "backend.fastapi_api:app", "--host", "0.0.0.0", "--port", "8000"]
