@@ -185,6 +185,10 @@ async def main():
     )
     await asyncio.gather(server.wait_closed(), prediction_loop())
 
-if __name__ == "__main__":
+# === Exported function for combined_runner ===
+def start_ws_server():
     asyncio.run(main())
 
+# === CLI run ===
+if __name__ == "__main__":
+    start_ws_server()
