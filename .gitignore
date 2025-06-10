@@ -9,7 +9,6 @@ venv/
 # Data
 data/
 processed_data/
-latest_prediction.json
 global_scaler.py
 
 # Frontend build + dependencies
