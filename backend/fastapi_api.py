@@ -1,11 +1,10 @@
-# backend/fastapi_api.py
+# fastapi_api.py (للـ Azure فقط)
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# Enable CORS for frontend integration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -13,7 +12,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Temporary in-memory storage for latest prediction
 latest_result = {"result": "No prediction yet", "confidence": 0.0}
 
 @app.get("/")
